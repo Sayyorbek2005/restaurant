@@ -8,7 +8,7 @@ export const HomePage = styled.div`
  align-items: center;  
  gap: 50px;
  flex-wrap: wrap;
- padding: 10px;
+ padding: 20px 10px;
 
 `
 
