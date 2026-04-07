@@ -1,36 +1,52 @@
-import { HomeCards, HomePage } from './Home.styles';
+import { HomeCards, HomeContCards, HomeHeader, HomePage } from './Home.styles';
 
 // ? imgs
 import imgOne from '../../assets/resImgFirst.jpg'
-// import img2 from '../../assets/imgs/2.jpg'
+import logo from '../../assets/primary-logo.png'
+import { Button } from '../../style/StyleComponent';
 // import img3 from '../../assets/imgs/3.jpg'
 const Home = () => {
   return (
+
     
-    <div className="max-width">
+    <HomePage>
+        <div className="max-width">
 
-      <HomePage>
+        <HomeHeader>
 
-        <HomeCards>
-          <img src={imgOne} alt="restaurant" />
-          <h1>Stol band qilish</h1>
-          <p>descript</p>
-        </HomeCards>
-        <HomeCards>
-          <img src={imgOne} alt="restaurant" />
-          <h1>Buyurtma berish</h1>
-          <p>descript</p>
-        </HomeCards>
-        <HomeCards>
-          <img src={imgOne} alt="restaurant" />
-          <h1>Yetkazib berish</h1>
-          <p>descript</p>
-        </HomeCards>
+          <img src={logo} alt="logo" />
+          <h1>
+           Restaurant
+          </h1>
+          <p>Lorem, ipsum dolor sit amet consectetur adipisicing elit. Aliquid, vitae!</p>
+        </HomeHeader>
 
-     
-       
-      </HomePage>
+        <HomeContCards>
+
+          <HomeCards>
+            <img src={imgOne} alt="restaurant" />
+            <h2>Stol band qilish</h2>
+            <p>descript</p>
+            <Button> kirish </Button>
+          </HomeCards>
+          <HomeCards>
+            <img src={imgOne} alt="restaurant" />
+            <h2>Buyurtma berish</h2>
+            <p>descript</p>
+            <Button> kirish </Button>
+          </HomeCards>
+          <HomeCards>
+            <img src={imgOne} alt="restaurant" />
+            <h2>Yetkazib berish</h2>
+            <p>descript</p>
+            <Button> kirish </Button>
+          </HomeCards>
+        </HomeContCards>
+
+
+
     </div>
+      </HomePage>
   )
 }
 

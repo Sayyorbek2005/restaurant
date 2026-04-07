@@ -6,17 +6,16 @@ export const Title = styled.h1`
 `
 
 export const Button = styled.button`
-  padding: 7px 20px;       
-    background-color: #007BFF;
+    padding: 7px 20px;       
+    background-color: #FFAC1C;
     color: white;
-    border: none;
+    border: 1px solid #FFAC1C;
     border-radius: 5px;
-    margin: 100px;
     transition: all 0.3s ease;
 
     &:hover {
       transform: translateY(-5px);
-        background-color: #036ad8;
+        border: 1px solid #fff;
         
     }
 `       
