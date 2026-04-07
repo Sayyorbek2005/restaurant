@@ -4,7 +4,7 @@ import { HomeCards, HomeContCards, HomeHeader, HomePage } from './Home.styles';
 import imgOne from '../../assets/res.jpg'
 import imgTwo from '../../assets/buyurtma.avif'
 import imgThree from '../../assets/yetkazish.jpeg'
-import logo from '../../assets/primary-logo.png'
+import logo from '../../assets/IMG_logo.PNG'
 // ? style
 import { Button } from '../../style/StyleComponent';
 

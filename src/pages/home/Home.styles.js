@@ -22,7 +22,10 @@ text-align: center;
 img{
     max-width: 200px;
     width: 100%;
-    background-color: transparent;
+    max-height: 200px;
+    height: 100%;
+    object-fit: cover;
+    margin: 30px 0px;
 
 }
 
