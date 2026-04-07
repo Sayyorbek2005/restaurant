@@ -7,7 +7,7 @@ export const Title = styled.h1`
 
 export const Button = styled.button`
     padding: 7px 20px;       
-    background-color: #FFAC1C;
+    background-color: #fba004;
     color: white;
     border: 1px solid #FFAC1C;
     border-radius: 5px;
