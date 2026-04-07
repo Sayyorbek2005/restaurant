@@ -4,9 +4,10 @@ import { ToastContainer } from 'react-toastify';
 import 'react-toastify/dist/ReactToastify.css';
 import './App.css';
 import './style/StyleComponent'; // Fayl yo'lini tekshirib ol
-// import Header from './components/header/Header';
-// import { Button } from './style/StyleComponent';
-// import { Title } from './style/StyleComponent';
+import Delivery from './pages/delivery/Delivery';
+import Order from './pages/order/Order';
+import Reserved from './pages/reserved/Reserved';
+
 
 
 function App() {
@@ -14,17 +15,16 @@ function App() {
   return (
     <div className="App">
       <ToastContainer />
-    
-      
-      
 
-     
 
       {/* ? router */}
       <Routes>
         {/* Odatda asosiy sahifa uchun path='/' bo'ladi */}
         <Route path='/' element={<Home />} />
         <Route path='home' element={<Home />} />
+        <Route path='delivery' element={<Delivery />} />
+        <Route path='order' element={<Order />} />
+        <Route path='reserved' element={<Reserved />} />
       </Routes>
     </div>
   );

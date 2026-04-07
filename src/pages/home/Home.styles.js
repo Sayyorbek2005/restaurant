@@ -1,7 +1,7 @@
 import styled from 'styled-components'
-
 import background from '../../assets/background.jpg';
 
+// ? style for home page
 export const HomePage = styled.div`
     background: url(${background});
     background-size: cover;
@@ -13,7 +13,7 @@ export const HomePage = styled.div`
 `;
 
 
-
+// ? style for home header
 export const HomeHeader = styled.div`
 
 text-align: center;
@@ -22,6 +22,7 @@ text-align: center;
 img{
     max-width: 200px;
     width: 100%;
+    background-color: transparent;
 
 }
 
@@ -40,6 +41,8 @@ p{
 
 `
 
+// ? style for home cards container
+
 export const HomeContCards = styled.div`
 
  /* height: 100vh; */
@@ -52,23 +55,27 @@ export const HomeContCards = styled.div`
  
  `
 
+// ? style for home cards
 
 export const HomeCards = styled.div`
 position: relative;
 background-color: var(--white);
 max-width: 300px;
 width: 100%;
-height: 350px;
+min-height: 400px;
+height: 100%;
 box-shadow: 0px 0px 10px rgba(0, 0, 0, 0.19);
 border-radius: 10px;
 padding: 20px;
 border: none;
 transition: all 0.3s ease;
+overflow: hidden;
 
 
 &:hover{
-    transform: translateY(-10px);
-    box-shadow: 0px 0px 15px rgba(0, 0, 0, 0.34);
+    /* transform: translateY(-10px); */
+    transform: scale(1.02);
+    box-shadow: 0px 0px 15px rgba(148, 148, 148, 0.72);
 
 }
 
@@ -86,19 +93,26 @@ img{
     border-radius: 10px;
     border-bottom-left-radius: 0px;
     border-bottom-right-radius: 0px;
+    transition: all 0.3s ease;
+}
+
+&:hover img{
+    transform: scale(1.05);  
 }
 
 h2{
     position: absolute;
-    bottom: 100px;
+    bottom: 150px;
+    max-width: 250px;
     font-size: var(--font-size-20);
 
 }
 p{
-position: absolute;
-bottom: 70px;
+    position: absolute;
+    bottom: 90px;
+    max-width: 250px;
     font-size: var(--font-size-14);  
-    color: #555;
+    color: var(--gray);
 }
 button{
     position: absolute;

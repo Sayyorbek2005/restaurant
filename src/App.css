@@ -1,4 +1,5 @@
 @import url('https://fonts.googleapis.com/css2?family=Poppins:wght@100;200;300;400;500;600;700;800;900&display=swap');
+
 /* RESET */
 * {
     padding: 0;
@@ -17,10 +18,10 @@ input {
 /* ROOT VARIABLES (RESPONSIVE) */
 :root {
     /* COLOR VARIABLES */
-    --primary-color: #2563eb;
+    --primary: #fb8804;
     --white: #fff;
     --black: #000;
-    --e5: #a5a5a5;
+    --gray: #555;
 
     /* RESPONSIVE FONT-SIZES */
     --font-size-16: clamp(14px, 1.2vw, 16px);
@@ -65,8 +66,8 @@ li {
 /* LINK STYLES RESET */
 a {
     text-decoration: none;
-    
-}   
+
+}
 
 /* MAX WIDTH */
 .max-width {
@@ -96,32 +97,14 @@ a {
 }
 
 @media (max-width: 1000) {
-    .max-width{
+    .max-width {
         padding: 10px;
     }
 }
 
 @media (max-width: 900) {
-    img{
+    img {
         max-width: 100%;
-        
+
     }
-}   
-
-
-button{
-    
-    padding: 7px 20px;       
-    background-color: #FFAC1C;
-    color: white;
-    border: 1px solid #FFAC1C;
-    border-radius: 5px;
-    transition: all 0.3s ease;
-
-    &:hover {
-      transform: translateY(-5px);
-        border: 1px solid #fff;
-        
-    }
-
 }
