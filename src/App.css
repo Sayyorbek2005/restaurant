@@ -70,7 +70,7 @@ a {
 
 /* MAX WIDTH */
 .max-width {
-    max-width: 1300px;
+    max-width: 1200px;
     margin: auto;
     transition: all 0.3s ease;
 }
@@ -106,4 +106,4 @@ a {
         max-width: 100%;
         
     }
-}
+}   

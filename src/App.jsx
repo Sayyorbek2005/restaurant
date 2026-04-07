@@ -4,9 +4,9 @@ import { ToastContainer } from 'react-toastify';
 import 'react-toastify/dist/ReactToastify.css';
 import './App.css';
 import './style/StyleComponent'; // Fayl yo'lini tekshirib ol
-import Header from './components/header/Header';
+// import Header from './components/header/Header';
 // import { Button } from './style/StyleComponent';
-import { Title } from './style/StyleComponent';
+// import { Title } from './style/StyleComponent';
 
 
 function App() {
@@ -14,8 +14,7 @@ function App() {
   return (
     <div className="App">
       <ToastContainer />
-      <Header />
-      <Title>is title tag</Title>
+    
       
       
 
