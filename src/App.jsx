@@ -1,13 +1,9 @@
 import { Route, Routes } from 'react-router-dom';
-import Home from "./pages/home/Home";
 import { ToastContainer } from 'react-toastify';
 import 'react-toastify/dist/ReactToastify.css';
 import './App.css';
 import './style/StyleComponent'; // Fayl yo'lini tekshirib ol
-import Delivery from './pages/delivery/Delivery';
-import Order from './pages/order/Order';
-import Reserved from './pages/reserved/Reserved';
-
+import { routes } from './routes';
 
 
 function App() {
@@ -19,12 +15,13 @@ function App() {
 
       {/* ? router */}
       <Routes>
-        {/* Odatda asosiy sahifa uchun path='/' bo'ladi */}
-        <Route path='/' element={<Home />} />
-        <Route path='home' element={<Home />} />
-        <Route path='delivery' element={<Delivery />} />
-        <Route path='order' element={<Order />} />
-        <Route path='reserved' element={<Reserved />} />
+        {routes.map((route, index) => (
+          <Route
+            key={index}
+            path={route.path}
+            element={route.element}
+          />
+        ))}
       </Routes>
     </div>
   );

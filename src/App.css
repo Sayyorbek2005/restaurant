@@ -18,7 +18,7 @@ input {
 /* ROOT VARIABLES (RESPONSIVE) */
 :root {
     /* COLOR VARIABLES */
-    --primary: #fb8804;
+    --primary: #fb6b04;
     --white: #fff;
     --black: #000;
     --gray: #555;
@@ -74,6 +74,11 @@ a {
     max-width: 1200px;
     margin: auto;
     transition: all 0.3s ease;
+}
+@media (max-width: 1250px) {
+    .max-width {
+        padding: 15px;
+    }
 }
 
 /* DISPLAY HELPERS */

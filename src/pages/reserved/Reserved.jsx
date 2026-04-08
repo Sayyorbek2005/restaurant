@@ -1,11 +1,21 @@
+import {ReservedPage} from "./Reserved.style"
 
 
 const Reserved = () => {
   return (
-    <div>
+    <ReservedPage>
+    <div className="max-width">
+
+
         <h1>Reserved</h1>
       
+
+
+
+
+
     </div>
+      </ReservedPage>
   )
 }
 
