@@ -4,11 +4,15 @@ export const DeliveryPage = styled.div`
     min-height: 100vh;
     width: 100%;
     background-color: #fdfdfd;
+    /* Butun sahifa o'ngga surilib ketmasligi uchun */
+    overflow-x: hidden; 
+    position: relative;
 `;
 
 export const DeliveryTitle = styled.div`
     text-align: center;   
     margin-bottom: 30px;
+    padding: 0 20px;
     h1 {
         font-size: var(--font-size-40);
         font-weight: var(--font-weight-500);
@@ -20,8 +24,21 @@ export const DeliveryTitle = styled.div`
 
 export const DeliveryNav = styled.div`
     display: flex;   
-    gap: 15px;
-    margin: 40px 0;
+    gap: 10px;
+    padding: 10px 20px; /* Yonlaridan ozgina joy */
+    
+    /* Faqat mana shu qism scroll bo'lishi uchun */
+    overflow-x: auto;
+    white-space: nowrap;
+    width: 100%;
+    -webkit-overflow-scrolling: touch; /* Mobilda silliq scroll */
+    
+    &::-webkit-scrollbar {
+        display: none; /* Scrollbarni yashirish */
+    }
+    -ms-overflow-style: none;  
+    scrollbar-width: none;  
+
     .nav-item {
         padding: 8px 18px;
         border: 1px solid var(--primary);
@@ -29,9 +46,46 @@ export const DeliveryNav = styled.div`
         cursor: pointer;
         font-weight: var(--font-weight-500);
         transition: 0.3s;
+        flex-shrink: 0; /* Elementlar qisqarib ketmasligi shart */
+
         &.active, &:hover { 
             background: var(--primary); 
             color: white; 
+        }
+    }
+`;
+
+export const CartButtonWrapper = styled.div`
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    gap: 20px;
+    margin: 20px 0 40px 0;
+    width: 100%;
+    padding: 0 20px; /* Konteynerdan chiqib ketmasligi uchun */
+    box-sizing: border-box;
+
+    .cart-icon-btn { 
+        background: var(--primary); 
+        color: white; 
+        padding: 12px 22px; 
+        border-radius: 12px; 
+        border: none; 
+        cursor: pointer; 
+        font-weight: var(--font-weight-600); 
+        box-shadow: 0 4px 10px rgba(255, 77, 77, 0.2);
+        white-space: nowrap;
+        transition: 0.3s;
+    }
+
+    @media (max-width: 768px) {
+        flex-direction: column;
+        align-items: stretch; /* Tugmani to'liq kenglikka cho'zish */
+        
+        .cart-icon-btn {
+            width: 100%;
+            text-align: center;
+            margin-top: 10px;
         }
     }
 `;
@@ -41,6 +95,7 @@ export const DeliveryMenu = styled.div`
     grid-template-columns: repeat(auto-fill, minmax(280px, 1fr));
     gap: 25px;
     margin-bottom: 50px;
+    padding: 0 20px;
     .order-card {
         background: white;
         padding: 20px;
@@ -147,17 +202,6 @@ export const CartOverlay = styled.div`
     background: rgba(0, 0, 0, 0.4);
     backdrop-filter: blur(5px);
     z-index: 1000;
-`;
-
-export const CartButtonWrapper = styled.div`
-    display: flex;
-    justify-content: space-between;
-    align-items: center;
-    .cart-icon-btn { 
-        background: var(--primary); color: white; padding: 12px 22px; 
-        border-radius: 12px; border: none; cursor: pointer; font-weight: var(--font-weight-600); 
-        box-shadow: 0 4px 10px rgba(255, 77, 77, 0.2);
-    }
 `;
 
 export const CardControlWrapper = styled.div`
