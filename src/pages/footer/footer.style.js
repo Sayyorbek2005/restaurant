@@ -4,7 +4,8 @@ export const FooterPage = styled.div`
     min-height: 30vh;
     height: 100%;
     /* width: 100%; */
-    background-color: var(--primary);   
+    background-color: var(--primary);  
+    margin-bottom: 0px; 
     
     `
     export const FooterCont = styled.div`

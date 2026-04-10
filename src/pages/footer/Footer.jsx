@@ -17,7 +17,7 @@ const Footer = () => {
         <p>Tez va sifatli xizmat, eng yangi taomlar</p>
         {/* <span>© 2024 Plaza. Barcha huquqlar himoyalangan.</span> */}
     </div>
-      </FooterCont>
+      </FooterCont> 
 
     </div>
         </FooterPage>

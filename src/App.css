@@ -19,6 +19,7 @@ input {
 :root {
     /* COLOR VARIABLES */
     --primary: #fb6b04;
+    --primary-hover: #fb832e;
     --white: #fff;
     --black: #000;
     --gray: #555;
