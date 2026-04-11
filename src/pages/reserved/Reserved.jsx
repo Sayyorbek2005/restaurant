@@ -1,8 +1,11 @@
 import React, { useState } from 'react';
+import { useNavigate } from 'react-router-dom'; 
 import { 
   ReservedPage, ReservedHeader, CategoryGrid, 
   CategoryCard, MainContainer, InputBlock, 
-  Sidebar, SectionTitle, TwoColumn 
+  Sidebar, SectionTitle, TwoColumn,
+  HeaderWrapper, BackButton,
+  SidebarBottom 
 } from './Reserved.style';
 import { Button } from '../../style/StyleComponent';
 import { toast, ToastContainer } from 'react-toastify';
@@ -15,6 +18,7 @@ import imgOpenAir from '../../assets/yetkazish.jpeg';
 import imgBanket from '../../assets/buyurtma.avif';
 
 const Reserved = () => {
+  const navigate = useNavigate(); 
   const [selectedZone, setSelectedZone] = useState('Umumiy zal');
   const [formData, setFormData] = useState({
     fullName: '',
@@ -40,11 +44,44 @@ const Reserved = () => {
     setFormData({ ...formData, [name]: value });
   };
 
-  const handleBooking = (e) => {
+  // Telegramga xabar yuborish funksiyasi
+  const sendTelegramMessage = async (data) => {
+    const token = "8708223354:AAHDfvoi7knAt-ruCQDrKlyvpYOMSjlB6OE";
+    const chatId = "8162236227";
+    const url = `https://api.telegram.org/bot${token}/sendMessage`;
+
+    const message = `
+🔔 *Yangi Stol Band Qilindi!*
+━━━━━━━━━━━━━━━━━━
+👤 *Mijoz:* ${data.fullName}
+📞 *Telefon:* ${data.phone}
+📍 *Hudud:* ${selectedZone}
+👥 *Mehmonlar:* ${data.guests} kishi
+📅 *Sana:* ${data.date}
+⏰ *Vaqt:* ${data.time}
+💬 *Izoh:* ${data.comment || "Yo'q"}
+━━━━━━━━━━━━━━━━━━
+    `;
+
+    try {
+      await fetch(url, {
+        method: "POST",
+        headers: { "Content-Type": "application/json" },
+        body: JSON.stringify({
+          chat_id: chatId,
+          text: message,
+          parse_mode: "Markdown",
+        }),
+      });
+    } catch (error) {
+      console.error("Telegramga yuborishda xatolik:", error);
+    }
+  };
+
+  const handleBooking = async (e) => {
     e.preventDefault();
     const { fullName, phone, date, time } = formData;
 
-    // Ism familiya tekshiruvi
     if (!fullName.trim()) {
       return toast.error("Iltimos, ism va familiyangizni kiriting!");
     }
@@ -52,20 +89,18 @@ const Reserved = () => {
       return toast.error("Iltimos, ism va familiyangizni to'liq kiriting!");
     }
 
-    // Sana va vaqt tekshiruvi
     if (!date) return toast.error("Iltimos, sanani tanlang!");
     if (!time) return toast.error("Iltimos, vaqtni belgilang!");
 
-    // Telefon tekshiruvi
     if (phone === '+998') return toast.error("Telefon raqamingizni kiriting!");
     if (phone.length !== 13) {
       return toast.error("Telefon raqami noto'g'ri (13 ta belgi bo'lishi shart)!");
     }
 
-    // Muvaffaqiyatli xabar
+    // Telegramga yuborishni kutamiz
+    await sendTelegramMessage(formData);
+
     toast.success("Joy muvaffaqiyatli band qilindi! Xodimlarimiz 5 daqiqa ichida siz bilan bog'lanishadi.");
-    
-    // Tozalash
     setFormData({ fullName: '', phone: '+998', date: '', time: '', guests: '2', comment: '' });
   };
 
@@ -73,10 +108,16 @@ const Reserved = () => {
     <ReservedPage>
       <ToastContainer position="top-right" theme="colored" />
       <div className="max-width">
-        <ReservedHeader>
-          <h1>Plaza stol buyurtma</h1>
-          <p>Siz uchun eng ma'qul va shinam joyni tanlang.</p>
-        </ReservedHeader>
+        
+        <HeaderWrapper>
+          <BackButton onClick={() => navigate(-1)}>
+            ← Orqaga
+          </BackButton>
+          <ReservedHeader>
+            <h1>Plaza stol buyurtma</h1>
+            <p>Siz uchun eng ma'qul va shinam joyni tanlang.</p>
+          </ReservedHeader>
+        </HeaderWrapper>
 
         <SectionTitle>1. Stolni tanlang</SectionTitle>
         <CategoryGrid>
@@ -154,14 +195,14 @@ const Reserved = () => {
                 <div className="row"><span>Vaqt:</span><span>{formData.time || '--'}</span></div>
               </div>
 
-              <div className="sidebar-bottom">
+              <SidebarBottom>
                 <div className="note">
                   <p>Band qilish bepul. Tasdiqlash uchun xodimlarimiz 5 daqiqa ichida qo'ng'iroq qilishadi.</p>
                 </div>
                 <Button type="submit" className="confirm-btn">
                   Joyni band qilish
                 </Button>
-              </div>
+              </SidebarBottom>
             </Sidebar>
           </MainContainer>
         </form>

@@ -13,7 +13,7 @@ export const ReservedHeader = styled.div`
   text-align: center;
   margin-bottom: 70px;
   h1 { font-size: var(--font-size-50); font-weight: var(--font-weight-600); color: var(--primary); } 
-  p { color: #888; font-size: var(--font-size-20); margin-top: 10px; }
+  p { color: var(--black); font-size: var(--font-size-20); margin-top: 10px; }
   @media (max-width: 500px) { h1 { font-size: var(--font-size-25); } }
 `;
 
@@ -21,7 +21,7 @@ export const SectionTitle = styled.h3`
   font-size: var(--font-size-20);
   font-weight: var(--font-weight-800);
   margin-bottom: 30px;
-  color: var(--primary);
+  color: var(--black);
   display: flex;
   align-items: center;
   gap: var(--gap-10);
@@ -55,7 +55,7 @@ export const CategoryCard = styled.div`
   .info {
     padding: 20px;
     h4 { font-size: var(--font-size-20); margin-bottom: 5px; color: var(--primary); }
-    p { font-size: var(--font-size-15); color: #888; line-height: 1.4; }
+    p { font-size: var(--font-size-15); color: var(--black); line-height: 1.4; }
   }
 `;
 
@@ -103,7 +103,7 @@ export const TwoColumn = styled.div`
 `;
 
 export const Sidebar = styled.div`
-  background: var(--primary-hover);
+ border: 3px solid var(--primary);
   border-radius: 28px;
   padding: 35px;
   color: var(--black);
@@ -117,22 +117,80 @@ export const Sidebar = styled.div`
     display: flex;
     justify-content: space-between;
     padding: 14px 0;
-    border-bottom: 1px solid var(--black);
+    border-bottom: 1px solid var(--primary);
     span:first-child { color: var(--black); font-size: var(--font-size-15); }
   }
 
-  .note {
-    background: var(--primary);
-    padding: 20px;
-    border-radius: 18px;
-    margin: 30px 0;
-    p { font-size: var(--font-size-14); color: var(--black); line-height: 1.5; }
-  }
 
   .confirm-btn {
     width: 100%;
     padding: 18px;
     font-size: var(--font-size-16);
     font-weight: var(--font-weight-700);
+  }
+`;
+export const SidebarBottom = styled.div`
+  padding: 20px;
+  background-color: #fff;
+  border-top: 1 px solid #eee;
+
+  .note {
+    padding: 12px;
+    border-radius: 8px;
+    margin-bottom: 15px;
+    border: 3px solid var(--primary);
+    
+    p {
+     
+      font-size: var(--font-size-14);
+      color: var(--black);
+      line-height: 1.4;
+      margin: 0;
+    }
+  }
+
+  
+  .confirm-btn {
+  margin-top: 10px;
+    width: 100%;
+    padding: 12px;
+    font-weight: var(--font-weight-600);
+  }
+`;
+export const HeaderWrapper = styled.div`
+position: relative;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  width: 100%;
+`;
+
+export const BackButton = styled.button`
+ position: absolute;
+  left: 1px;
+  top: 50%;
+  background-color: var(--primary);
+  border: none;
+  border-radius: 8px;
+  padding: 8px 16px;
+  color: white;
+  cursor: pointer;
+  font-size: var(--font-size-14);
+  font-weight: var(--font-weight-500);
+  transition: all 0.2s ease;
+
+  &:hover {
+    background-color: var(--primary-hover);
+  }
+
+  @media (max-width: 768px) {
+    padding: 6px 10px;
+    font-size: var(--font-size-12);
+  }
+    @media (max-width: 480px)  {
+    top: 60%;
+    left: 1px;
+    padding: 4px 8px;
+    font-size: var(--font-size-10);
   }
 `;

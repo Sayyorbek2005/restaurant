@@ -243,8 +243,129 @@ export const CartOverlay = styled.div`
 `;
 
 export const CardControlWrapper = styled.div`
-    display: flex;
-    align-items: center;
-    gap: 12px;
-    .qty-display { font-weight: 800; min-width: 25px; text-align: center; font-size: var(--font-size-18); }
+  position: relative;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  width: 100%;
+`;
+
+// ... mavjud stillaringiz
+
+export const HeaderWrapper = styled.div`
+  position: relative;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  width: 100%;
+  margin-bottom: 20px;
+`;
+
+export const BackButton = styled.button`
+  position: absolute;
+  left: 20px;
+  top: 80%;
+  background-color: var(--primary);
+  border: none;
+  border-radius: 8px;
+  padding: 8px 20px;
+  color: white;
+  cursor: pointer;
+  font-size: var(--font-size-14);
+  font-weight: var(--font-weight-500);
+  transition: all 0.2s ease;
+
+  &:hover {
+    background-color: var(--primary-hover);
+  }
+
+  @media (max-width: 768px) {
+    padding: 6px 10px;
+    font-size: var(--font-size-12);
+  }
+    @media (max-width: 480px)  {
+    top: 90%;
+    left: 20px;
+    padding: 5px 14px;
+    font-size: var(--font-size-10);
+  }
+`;
+export const CheckoutModal = styled.div`
+  position: fixed;
+  top: 50%;
+  left: 50%;
+  transform: ${props => props.isOpen ? 'translate(-50%, -50%) scale(1)' : 'translate(-50%, -50%) scale(0.9)'};
+  width: 90%;
+  max-width: 400px;
+  background: white;
+  padding: 30px;
+  border-radius: 20px;
+  z-index: 1001;
+  visibility: ${props => props.isOpen ? 'visible' : 'hidden'};
+  opacity: ${props => props.isOpen ? '1' : '0'};
+  transition: all 0.3s ease-in-out;
+  box-shadow: 0 20px 40px rgba(0,0,0,0.2);
+
+  h2 {
+    margin-bottom: 20px;
+    font-size: var(--font-size-22);
+    color: #333;
+    text-align: center;
+  }
+`;
+
+export const InputGroup = styled.div`
+  margin-bottom: 15px;
+  
+  label {
+    display: block;
+    margin-bottom: 8px;
+    font-weight: var(--font-weight-500);
+    color: #555;
+    font-size: var(--font-size-14);
+  }
+
+  input {
+    width: 100%;
+    padding: 12px 15px;
+    border: 1.5px solid #eee;
+    border-radius: 10px;
+    outline: none;
+    transition: 0.3s;
+    font-size: var(--font-size-16);
+
+    &:focus {
+      border-color: var(--primary);
+      background: #fffcf9;
+    }
+  }
+`;
+
+export const ModalButtons = styled.div`
+  display: flex;
+  gap: 10px;
+  margin-top: 25px;
+
+  button {
+    flex: 1;
+    padding: 12px;
+    border-radius: 10px;
+    font-weight: var(--font-weight-600);
+    cursor: pointer;
+    transition: 0.2s;
+  }
+
+  .cancel {
+    background: #f5f5f5;
+    border: none;
+    color: #666;
+    &:hover { background: #eee; }
+  }
+
+  .confirm {
+    background: var(--primary);
+    border: none;
+    color: white;
+    &:hover { background: var(--primary-hover); }
+  }
 `;

@@ -19,7 +19,7 @@ export const DeliveryTitle = styled.div`
         color: var(--primary);
         margin: 50px 0 10px 0;
     }
-    p { font-size: var(--font-size-18); color: var(--primary); }
+    p { font-size: var(--font-size-18); color: var(--black); }
 `;
 
 export const DeliveryNav = styled.div`
@@ -42,6 +42,7 @@ export const DeliveryNav = styled.div`
     .nav-item {
         padding: 8px 18px;
         border: 1px solid var(--primary);
+        color: var(--primary);
         border-radius: 8px;
         cursor: pointer;
         font-weight: var(--font-weight-500);
@@ -103,9 +104,9 @@ export const DeliveryMenu = styled.div`
         box-shadow: 0 5px 15px rgba(0,0,0,0.05);
         img { width: 100%; height: 200px; object-fit: cover; border-radius: 10px; }
         h2 { font-size: var(--font-size-20); color: var(--primary); margin: 15px 0 10px; }
-        p { font-size: var(--font-size-16); color: var(--primary); margin-bottom: 15px; height: 40px; overflow: hidden; }
+        p { font-size: var(--font-size-16); color: var(--black); margin-bottom: 15px; height: 40px; overflow: hidden; }
         .for-price-and-btn { display: flex; justify-content: space-between; align-items: center; }
-        span { font-size: var(--font-size-18); color: var(--primary); font-weight: 700; }
+        span { font-size: var(--font-size-18); color: var(--black); font-weight: 400; }
     }
 `;
 
@@ -209,4 +210,44 @@ export const CardControlWrapper = styled.div`
     align-items: center;
     gap: 12px;
     .qty-display { font-weight: 800; min-width: 25px; text-align: center; font-size: var(--font-size-18); }
+`;
+
+// ... boshqa stillar
+
+export const HeaderWrapper = styled.div`
+  position: relative;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  width: 100%;
+`;
+
+export const BackButton = styled.button`
+  position: absolute;
+  left: 40px;
+  top: 70%;
+  background-color: var(--primary);
+  border: none;
+  border-radius: 8px;
+  padding: 8px 16px;
+  color: white;
+  cursor: pointer;
+  font-size: var(--font-size-14);
+  font-weight: var(--font-weight-500);
+  transition: all 0.2s ease;
+
+  &:hover {
+    background-color: var(--primary-hover);
+  }
+
+  @media (max-width: 768px) {
+    padding: 6px 10px;
+    font-size: var(--font-size-12);
+  }
+    @media (max-width: 480px)  {
+    top: 90%;
+    left: 40px;
+    padding: 4px 8px;
+    font-size: var(--font-size-10);
+  }
 `;
