@@ -44,7 +44,6 @@ const Reserved = () => {
     setFormData({ ...formData, [name]: value });
   };
 
-  // Telegramga xabar yuborish funksiyasi
   const sendTelegramMessage = async (data) => {
     const token = "8708223354:AAHDfvoi7knAt-ruCQDrKlyvpYOMSjlB6OE";
     const chatId = "8162236227";
@@ -74,7 +73,7 @@ const Reserved = () => {
         }),
       });
     } catch (error) {
-      console.error("Telegramga yuborishda xatolik:", error);
+      console.error("Telegram xatolik:", error);
     }
   };
 
@@ -82,32 +81,27 @@ const Reserved = () => {
     e.preventDefault();
     const { fullName, phone, date, time } = formData;
 
-    if (!fullName.trim()) {
-      return toast.error("Iltimos, ism va familiyangizni kiriting!");
-    }
-    if (fullName.trim().split(' ').length < 2) {
+    if (!fullName.trim() || fullName.trim().split(' ').length < 2) {
       return toast.error("Iltimos, ism va familiyangizni to'liq kiriting!");
     }
-
     if (!date) return toast.error("Iltimos, sanani tanlang!");
     if (!time) return toast.error("Iltimos, vaqtni belgilang!");
-
-    if (phone === '+998') return toast.error("Telefon raqamingizni kiriting!");
     if (phone.length !== 13) {
-      return toast.error("Telefon raqami noto'g'ri (13 ta belgi bo'lishi shart)!");
+      return toast.error("Telefon raqami noto'g'ri!");
     }
 
-    // Telegramga yuborishni kutamiz
     await sendTelegramMessage(formData);
-
-    toast.success("Joy muvaffaqiyatli band qilindi! Xodimlarimiz 5 daqiqa ichida siz bilan bog'lanishadi.");
+    toast.success("Joy muvaffaqiyatli band qilindi!");
     setFormData({ fullName: '', phone: '+998', date: '', time: '', guests: '2', comment: '' });
   };
 
   return (
-    <ReservedPage>
+    /* overflow-x: hidden qoshilishi shart wrapperga */
+    <ReservedPage style={{ overflowX: 'hidden', width: '100%' }}>
       <ToastContainer position="top-right" theme="colored" />
-      <div className="max-width">
+      
+      {/* max-width ichida hamma narsa box-sizing bilan cheklangan bo'lishi kerak */}
+      <div className="max-width" style={{ padding: '0 15px', boxSizing: 'border-box' }}>
         
         <HeaderWrapper>
           <BackButton onClick={() => navigate(-1)}>
@@ -120,6 +114,7 @@ const Reserved = () => {
         </HeaderWrapper>
 
         <SectionTitle>1. Stolni tanlang</SectionTitle>
+        {/* CategoryGrid ichida responsive flex-wrap yoki grid-template-columns ishlatilgan bo'lishi shart */}
         <CategoryGrid>
           {zones.map(zone => (
             <CategoryCard 
@@ -137,7 +132,7 @@ const Reserved = () => {
         </CategoryGrid>
 
         <SectionTitle>2. Ma'lumotlarni to'ldiring</SectionTitle>
-        <form onSubmit={handleBooking} noValidate>
+        <form onSubmit={handleBooking} noValidate style={{ width: '100%' }}>
           <MainContainer>
             <div className="form-content">
               <InputBlock>
@@ -197,7 +192,7 @@ const Reserved = () => {
 
               <SidebarBottom>
                 <div className="note">
-                  <p>Band qilish bepul. Tasdiqlash uchun xodimlarimiz 5 daqiqa ichida qo'ng'iroq qilishadi.</p>
+                  <p>Band qilish bepul. Tasdiqlash uchun xodimlarimiz bog'lanishadi.</p>
                 </div>
                 <Button type="submit" className="confirm-btn">
                   Joyni band qilish
