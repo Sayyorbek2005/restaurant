@@ -1,5 +1,5 @@
-import React, { useState } from 'react'
-import { useNavigate } from 'react-router-dom';
+import React, { useState, useEffect } from 'react' // useEffect qo'shildi
+import { useNavigate, useLocation } from 'react-router-dom'; // useLocation qo'shildi
 import { 
   OrderMenu, OrderNav, OrderPage, OrderTitle, 
   CartModal, CartOverlay, CartButtonWrapper, 
@@ -20,6 +20,7 @@ import Footer from '../footer/Footer';
 
 const Order = () => {
   const navigate = useNavigate();
+  const location = useLocation(); // URL parametrlarni ushlash uchun
   const [activeNav, setActiveNav] = useState('Hammasi');
   const [cart, setCart] = useState([]);
   const [isCartOpen, setIsCartOpen] = useState(false);
@@ -29,6 +30,15 @@ const Order = () => {
   const [userName, setUserName] = useState('');
   const [tableNum, setTableNum] = useState('');
 
+  // --- QR KODDAN KELGAN STOL RAQAMINI ANIQLASH ---
+  useEffect(() => {
+    const params = new URLSearchParams(location.search);
+    const table = params.get('table');
+    if (table) {
+      setTableNum(table);
+    }
+  }, [location]);
+
   // --- TELEGRAM LOGIC ---
   const sendToTelegram = async () => {
     const token = "8708223354:AAHDfvoi7knAt-ruCQDrKlyvpYOMSjlB6OE";
@@ -36,7 +46,7 @@ const Order = () => {
     const url = `https://api.telegram.org/bot${token}/sendMessage`;
 
     const productList = cart.map((item, index) => 
-      `${index + 1}. *${item.title}* \n   ${item.quantity} ta x ${item.price} = ${parseInt(item.price) * item.quantity}$`
+      `${index + 1}. *${item.title}* \n   ${item.quantity} ta x ${item.price} = ${parseInt(item.price) * item.quantity} so'm`
     ).join('\n\n');
 
     const message = `
@@ -48,7 +58,7 @@ const Order = () => {
 🛒 *MAHSULOTLAR:*
 ${productList}
 
-💰 *JAMI:* ${totalPrice}$
+💰 *JAMI:* ${totalPrice} so'm
 ━━━━━━━━━━━━━━━━━━
     `;
 
@@ -95,7 +105,6 @@ ${productList}
   const handleFinalSubmit = async (e) => {
     e.preventDefault();
 
-    // TO'LIQ XAVFSIZLIK VA VALIDATSIYA
     if (!userName.trim() || userName.trim().split(' ').length < 2) {
       return toast.error("Iltimos, ism va familiyangizni to'liq kiriting!");
     }
@@ -109,7 +118,10 @@ ${productList}
       toast.success("Buyurtmangiz qabul qilindi!");
       setCart([]);
       setUserName('');
-      setTableNum('');
+      // Agar stol QR orqali kelmagan bo'lsa, stol raqamini ham tozalaymiz
+      if (!new URLSearchParams(location.search).get('table')) {
+        setTableNum('');
+      }
       setIsCheckoutOpen(false);
     } else {
       toast.error("Xatolik! Internetni tekshiring.");
@@ -136,7 +148,6 @@ ${productList}
       <ToastContainer position="top-right" autoClose={3000} />
       <CartOverlay isOpen={isCartOpen || isCheckoutOpen} onClick={() => { setIsCartOpen(false); setIsCheckoutOpen(false); }} />
       
-      {/* 1. SAVATCHA MODALI */}
       <CartModal isOpen={isCartOpen}>
         <div className="cart-header">
           <h2>Savatcha ({totalItems})</h2>
@@ -161,18 +172,17 @@ ${productList}
                 <button className="qty-btn" onClick={() => removeFromCart(item.id)}>-</button>
                 <span className="qty-num">{item.quantity}</span>
                 <button className="qty-btn" onClick={() => addToCart(item)}>+</button>
-                <div className="price-total">{parseInt(item.price) * item.quantity} so\'m</div>
+                <div className="price-total">{parseInt(item.price) * item.quantity} so'm</div>
               </div>
             </CartItemRow>
           ))}
         </div>
         <CartFooter>
-          <div className="total-row"><span>Jami:</span><span>{totalPrice} so\'m</span></div>
+          <div className="total-row"><span>Jami:</span><span>{totalPrice} so'm</span></div>
           <Button className="submit-btn" onClick={handleOpenCheckout}>Buyurtma berish</Button>
         </CartFooter>
       </CartModal>
 
-      {/* 2. CHECKOUT MODAL (ism va stol) */}
       <CheckoutModal isOpen={isCheckoutOpen}>
         <h2>Tasdiqlash</h2>
         <form onSubmit={handleFinalSubmit}>
@@ -186,12 +196,15 @@ ${productList}
             />
           </InputGroup>
           <InputGroup>
-            <label>Stol raqami</label>
+            <label>Stol raqami {new URLSearchParams(location.search).get('table') && "(QR orqali aniqlandi)"}</label>
             <input 
               type="number" 
               placeholder="Stol raqamini kiriting"
               value={tableNum}
               onChange={(e) => setTableNum(e.target.value)}
+              // QR orqali kelgan bo'lsa o'zgartirib bo'lmaydi
+              readOnly={!!new URLSearchParams(location.search).get('table')}
+              style={new URLSearchParams(location.search).get('table') ? {background: '#f0f0f0', cursor: 'not-allowed'} : {}}
             />
           </InputGroup>
           <ModalButtons>

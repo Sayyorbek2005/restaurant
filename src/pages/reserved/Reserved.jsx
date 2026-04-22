@@ -202,7 +202,9 @@ const Reserved = () => {
           </MainContainer>
         </form>
       </div>
+      
       <Footer />
+      
     </ReservedPage>
   );
 };

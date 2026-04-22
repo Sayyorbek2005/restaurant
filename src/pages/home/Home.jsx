@@ -1,34 +1,43 @@
 import { HomeCards, HomeContCards, HomeHeader, HomePage } from './Home.styles';
-
-// ? imgs
-import imgOne from '../../assets/res.jpg'
-import imgTwo from '../../assets/buyurtma.avif'
-import imgThree from '../../assets/yetkazish.jpeg'
-import logo from '../../assets/IMG_logo.PNG'
-// ? style
+import imgOne from '../../assets/res.jpg';
+import imgTwo from '../../assets/buyurtma.avif';
+import imgThree from '../../assets/yetkazish.jpeg';
+import logo from '../../assets/IMG_logo.PNG';
 import { Button } from '../../style/StyleComponent';
-
-import { useNavigate } from 'react-router-dom';
-import { useState } from 'react';
+import { useNavigate, useLocation } from 'react-router-dom';
+import { useState, useEffect } from 'react';
 
 const Home = () => {
-  //  navigate
   const navigation = useNavigate();
+  const location = useLocation();
+  const [tableId, setTableId] = useState(null);
 
-  // ? click functions
+  // QR skaner qilinganda URL parametridan stol raqamini olish
+  useEffect(() => {
+    const params = new URLSearchParams(location.search);
+    const table = params.get('table');
+    if (table) {
+      setTableId(table);
+    }
+  }, [location]);
+
   const reservedClick = () => {
-    navigation('/reserved')
-  }
+    navigation('/reserved');
+  };
 
   const orderClick = () => {
-    navigation('/order')
-  }
+    // Agar stol raqami aniqlangan bo'lsa, uni Order sahifasiga uzatamiz
+    if (tableId) {
+      navigation(`/order?table=${tableId}`);
+    } else {
+      navigation('/order');
+    }
+  };
 
   const deliveryClick = () => {
-    navigation('/delivery')
-  }
+    navigation('/delivery');
+  };
 
-  // ? use state for information cards
   const [homeCards] = useState([
     {
       id: 1,  
@@ -54,23 +63,36 @@ const Home = () => {
       btn: 'Yetkazib berish',
       click: deliveryClick
     }
-  ])  
+  ]);
 
   return (
     <HomePage>
       <div className="max-width">
-        {/* ? home header */}
         <HomeHeader>
           <img src={logo} alt="logo" />
           <h1>Plaza</h1>
+          {tableId && (
+            <div style={{
+              background: '#e67e22',
+              color: '#fff',
+              padding: '6px 16px',
+              borderRadius: '25px',
+              fontSize: '14px',
+              fontWeight: 'bold',
+              margin: '10px 0',
+              display: 'inline-block',
+              boxShadow: '0 2px 5px rgba(0,0,0,0.2)'
+            }}>
+              Stol №{tableId}
+            </div>
+          )}
           <p>Barchangizga xizmat ko`rsatishimizdan mamnunmiz..!</p>
         </HomeHeader>
 
-        {/* ? cards */}
         <HomeContCards>
           {homeCards.map((card) => (
             <HomeCards onClick={card.click} key={card.id}>
-              <img src={card.img} alt="restaurant" />
+              <img src={card.img} alt={card.title} />
               <h2>{card.title}</h2>
               <p>{card.desc}</p>
               <Button>{card.btn}</Button>
@@ -79,7 +101,7 @@ const Home = () => {
         </HomeContCards>
       </div>
     </HomePage>
-  )
-}
+  );
+};
 
-export default Home
+export default Home;
